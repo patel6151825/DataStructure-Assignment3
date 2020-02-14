@@ -4,42 +4,39 @@ import java.util.Arrays;
 
 public class Task3 {
 
-	public void SplitArrayPossibleOrNot(int[] array) {
-		boolean result=true;
-		int leftSum = 0, rightSum = 0;
+	public boolean helper(int array[], int length, int startpoint, int leftsum, int rightsum) {
 
-		int x = 0, y = 0;
-		//defining two new array to contain split array
-		int[] splitArray1 = new int[array.length - 1];
-		int[] splitArray2 = new int[array.length - 1];
+		// exit condition
+		if (startpoint == length) {
+			return leftsum == rightsum;
+		}
 
-		//if array is empty or contain only 1 then can not split
-		if (array.length <2) {
-			result=false;
-		} 
+		// If divisible by 5 then add to the left sum
+		if (array[startpoint] % 5 == 0) {
+			leftsum += array[startpoint];
+		}
+
+		// If divisible by 3 but not by 5 then add to the right sum
+		else if (array[startpoint] % 3 == 0) {
+			rightsum += array[startpoint];
+		}
+
+		// it can be added to any
 		else {
-			for (int i = 0, j = array.length - 1; i <= j;) {
-				if (leftSum <= rightSum) {
-					leftSum += array[i];
-					splitArray1[x] = array[i];
-					i++;
-					x++;
-
-				} else {
-					rightSum += array[j];
-					splitArray2[y] = array[j];
-					j--;
-					y++;
-				}
-			}
+			return helper(array, length, startpoint + 1, leftsum + array[startpoint], rightsum)
+					|| helper(array, length, startpoint + 1, leftsum, rightsum + array[startpoint]);
 		}
 
-		if ((rightSum == leftSum) && result==true) {
-			System.out.println("Yes splitting is possible");
-			System.out.println(Arrays.toString(splitArray1));
-			System.out.println(Arrays.toString(splitArray2));
-		} else {
-			System.out.println("No splitting is not possible");
-		}
+		// when element is multiple of 3 or 5
+		return helper(array, length, startpoint + 1, leftsum, rightsum);
 	}
+
+	public boolean splitArray(int arr[], int length) {
+		// Initially setting start, leftsum and rightsum to 0
+		int startpoint = 0, leftsum = 0, rightsum = 0;
+		boolean result = helper(arr, length, startpoint, leftsum, rightsum);
+
+		return result;
+	}
+
 }

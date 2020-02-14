@@ -11,11 +11,11 @@ public class RunProgram {
 
 		System.out.println("\n-----------------------------Task 1---------------------------");
 		Task1 task1 = new Task1();
-		String str = "abcababcaabcabcaabbccabc";
+		String str = "abcababcaabcabcaabbccabc"; //////////////////////////////////
 		int[] counterArray = new int[2];
-		//count1 for counting abc and count2 for counting aba set to 0
-		int count1=0,count2=0;
-		int[] counterResult = task1.countSubstringabcAndaba(str,counterArray,count1,count2);
+		// count1 for counting abc and count2 for counting aba set to 0
+		int count1 = 0, count2 = 0;
+		int[] counterResult = task1.countSubstringabcAndaba(str, counterArray, count1, count2);
 		System.out.println("Total Number Of abc = " + counterResult[0]);
 		System.out.println("Total Number Of aba = " + counterResult[1]);
 
@@ -25,9 +25,15 @@ public class RunProgram {
 
 		System.out.println("-----------------------------Task 3---------------------------");
 		Task3 task3 = new Task3();
-		int[] array = new int[] { 3,10,5,3,-1};
-		System.out.println("Given Array = " + Arrays.toString(array));
-		Arrays.sort(array);
-		task3.SplitArrayPossibleOrNot(array);
+		int array[] = {5,2,3};
+		System.out.println("Given array : " + Arrays.toString(array));
+
+		boolean result = task3.splitArray(array, array.length);
+		if (result == true) {
+			System.out.println("Splitting is possible");
+		} else {
+			System.out.println("Splitting is not possible");
+		}
+
 	}
 }
